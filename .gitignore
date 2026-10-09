@@ -1,0 +1,22 @@
+# .NET / IDE outputs
+[Bb]in/
+[Oo]bj/
+.vs/
+.idea/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Generated exports and local CAD inputs
+Output_DXF/
+*.sldprt
+*.sldasm
+*.slddrw
+*.dxf
+*.dwg
+
+# Local logs and OS files
+*.log
+Thumbs.db
+.DS_Store
