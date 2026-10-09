@@ -20,3 +20,10 @@ Output_DXF/
 *.log
 Thumbs.db
 .DS_Store
+
+# Runtime settings, reports and previews
+settings.json
+Logs/
+Thumbs/
+KesimListesiRaporu.csv
+KesimListesiRaporu.html

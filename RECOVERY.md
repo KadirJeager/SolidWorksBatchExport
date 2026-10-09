@@ -22,7 +22,7 @@ Proje sahibi tarafından sağlanan `SolidWorksBatchExport-hizli-sifreli.exe` dos
 
 Bu, özgün editör dosyalarının bire bir yedeği değildir. Korumanın sildiği özgün özel üye adları ve yorumlar geri getirilemez; bazı adlar `Method_060000...` / `field_040000...` biçiminde metadata kimlikleriyle korunmuştur. XAML ve C# decompiler çıktısından yeniden derlenebilir hale getirilmiştir.
 
-- Metin değiştirme sırasında uygulama yöntemlerinin IL talimat sayıları korundu ve kaldırılan metin çözücüye başvuru kalmadığı kontrol edildi.
+- Bağımsız IL karşılaştırmasında 195 uygulama yöntemindeki 10592 talimat kontrol edildi. İzin verilen 548 metin çağrısı değişikliği dışında talimatlar ve operandları, dallanma hedefleri, yerel değişken tipleri ve istisna bölgeleri eşleşti. Bu karşılaştırma C# decompiler çıktısının yeniden derlenmesini değil, gizleme katmanı kaldırılmış yönetilen assembly dönüşümünü doğrular. Kaldırılan metin çözücüye başvuru kalmadığı ayrıca kontrol edildi.
 - Release derleme ve `win-x64`, self-contained, tek dosya publish tamamlandı.
 - Kurtarma EXE'si, özgün dosyayla aynı .NET 8.0.29 çalışma zamanı kullanılarak üretildi.
 - `NU1701`: .NET Framework hedefli SOLIDWORKS interop paketlerinin .NET 8 üzerinde kullanımı için NuGet uyarısı devam eder; paket sürümleri sessizce yükseltilmedi.
