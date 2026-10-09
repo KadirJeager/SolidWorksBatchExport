@@ -1,71 +1,25 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using SolidWorks.Interop.sldworks;
-using SolidWorks.Interop.swconst;
+using System.Linq;
+using System.Runtime.CompilerServices;
 
-namespace SolidWorksBatchExport.Core
+namespace SolidWorksBatchExport.Core;
+
+public class Scanner
 {
-    public class Scanner
-    {
-        private ISldWorks _swApp;
 
-        public Scanner(ISldWorks swApp)
-        {
-            _swApp = swApp;
-        }
 
-        /// <summary>
-        /// Belirtilen klasördeki (ve alt klasörlerindeki) tüm sac levha parçalarını bulur.
-        /// </summary>
-        public List<string> GetSheetMetalPartsFromFolder(string folderPath)
-        {
-            var sheetMetalParts = new List<string>();
-            var allParts = Directory.GetFiles(folderPath, "*.sldprt", SearchOption.AllDirectories);
-
-            foreach (var partPath in allParts)
-            {
-                if (IsSheetMetalPart(partPath))
-                {
-                    sheetMetalParts.Add(partPath);
-                }
-            }
-
-            return sheetMetalParts;
-        }
-
-        /// <summary>
-        /// Bir parçanın sac levha (Sheet Metal) unsuru içerip içermediğini kontrol eder.
-        /// Dosyayı arka planda gizli açar, kontrol eder ve kapatır.
-        /// </summary>
-        private bool IsSheetMetalPart(string filePath)
-        {
-            bool isSheetMetal = false;
-            int errors = 0;
-            int warnings = 0;
-
-            // Dosyayı görünmez (hidden) olarak açıyoruz
-            ModelDoc2 swModel = (ModelDoc2)_swApp.OpenDoc6(filePath, (int)swDocumentTypes_e.swDocPART, (int)swOpenDocOptions_e.swOpenDocOptions_Silent | (int)swOpenDocOptions_e.swOpenDocOptions_ReadOnly, "", ref errors, ref warnings);
-            
-            if (swModel != null)
-            {
-                Feature swFeat = (Feature)swModel.FirstFeature();
-                while (swFeat != null)
-                {
-                    // "SheetMetal" veya "FlatPattern" unsuru varsa bu bir sac parçadır
-                    if (swFeat.GetTypeName2() == "SheetMetal" || swFeat.GetTypeName2() == "FlatPattern")
-                    {
-                        isSheetMetal = true;
-                        break;
-                    }
-                    swFeat = (Feature)swFeat.GetNextFeature();
-                }
-
-                // Dosyayı kapatıyoruz (kaydetmeden)
-                _swApp.CloseDoc(filePath);
-            }
-
-            return isSheetMetal;
-        }
-    }
+	public List<string> GetModelFilesFromFolder(string P_0)
+	{
+		if (string.IsNullOrWhiteSpace(P_0) || !Directory.Exists(P_0))
+		{
+			throw new ArgumentException("Geçerli bir klasör yolu belirtilmedi.");
+		}
+		string[] field_0400008D = new string[2] { ".sldprt", ".sldasm" };
+		return (from path in Directory.GetFiles(P_0, "*.*", SearchOption.AllDirectories)
+			where Enumerable.Contains(field_0400008D, Path.GetExtension(path).ToLower())
+			where !Path.GetFileName(path).StartsWith("~$", StringComparison.Ordinal)
+			select path).ToList();
+	}
 }
