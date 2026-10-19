@@ -43,7 +43,7 @@ dotnet publish SolidWorksBatchExport.csproj -c Release -r win-x64 --self-contain
 
 Çıktı: `bin/Release/net8.0-windows/win-x64/publish/SolidWorksBatchExport-hizli.exe`.
 
-**Dosya adını koruyun:** Kurtarılan sürüm, hızlı çentikleme modunu EXE adında `hizli` geçmesiyle seçer. Projedeki `AssemblyName` bunu korur. Tek dosya paketleme SOLIDWORKS kurulum gereksinimini kaldırmaz.
+**Dosya adını koruyun:** 
 
 ## Kullanım ve doğrulama
 
