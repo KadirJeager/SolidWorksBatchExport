@@ -2,7 +2,7 @@
 
 SOLIDWORKS sac levha parçaları için toplu DXF/DWG açınım dışa aktarma, büküm ucu çentikleme ve kesim listesi raporlama uygulaması. Windows üzerinde C# / .NET 8 / WPF ile çalışır.
 
-**Mevcut kapsamıyla çalışan uygulama.** Proje sahibi kendi kullanımında çentiklerin kusursuz oluşturulduğunu belirtmektedir. Bu depo, proje sahibinin sağladığı çalışan hızlı sürümün EXE dosyasından geri çıkarılan kaynak kodunu GPL altında sunar. Kaynağın kökeni ve doğrulama sınırları [RECOVERY.md](RECOVERY.md) dosyasındadır.
+
 
 ## Özellikler
 
