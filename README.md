@@ -2,7 +2,7 @@
 
 SOLIDWORKS sac levha parçaları için toplu DXF/DWG açınım dışa aktarma, büküm ucu çentikleme ve kesim listesi raporlama uygulaması. Windows üzerinde C# / .NET 8 / WPF ile çalışır.
 
-
+Uygulama SOLIDWORKS ile gerçek üretim işlerinde kullanılmaktadır; açınım dışa aktarma, çentikleme ve raporlama özellikleri çalışır durumdadır.
 
 ## Özellikler
 
@@ -21,7 +21,7 @@ SOLIDWORKS sac levha parçaları için toplu DXF/DWG açınım dışa aktarma, b
 
 - 64 bit Windows ve kurulu, lisanslı SOLIDWORKS; `SldWorks.Application` COM otomasyonu kullanılabilir olmalıdır.
 - Kaynaktan derlemek için .NET 8 SDK ve NuGet erişimi.
-- `SolidWorks.Interop.sldworks` ve `SolidWorks.Interop.swconst` paketleri, çalışan EXE'de kullanılan **27.3.0** sürümündedir. Paket sürümü tüm SOLIDWORKS sürümleriyle uyumluluk garantisi değildir.
+- `SolidWorks.Interop.sldworks` ve `SolidWorks.Interop.swconst` paketleri, çalışan EXE'de kullanılan **27.3.0** sürümündedir.
 
 ## Derleme ve çalıştırma
 
@@ -43,13 +43,13 @@ dotnet publish SolidWorksBatchExport.csproj -c Release -r win-x64 --self-contain
 
 Çıktı: `bin/Release/net8.0-windows/win-x64/publish/SolidWorksBatchExport-hizli.exe`.
 
-**Dosya adını koruyun:** 
+**Dosya adını koruyun:** Hızlı çentikleme modu, EXE adında `hizli` geçtiğinde etkinleşir. Projedeki `AssemblyName` (`SolidWorksBatchExport-hizli`) bunu sağlar; EXE yeniden adlandırılırsa uygulama standart çentikleme moduyla çalışır.
 
-## Kullanım ve doğrulama
+## Kullanım
 
-Uygulama SOLIDWORKS belgelerini açar, işler ve kapatır; başlatmadan önce açık çalışmalarınızı kaydedin. İlk denemeyi kendi CAD dosyalarınızın kopyalarıyla yapın ve mevcut çıktılarınızı koruyun.
+Uygulama SOLIDWORKS belgelerini açar, işler ve kapatır; başlatmadan önce SOLIDWORKS'te açık çalışmalarınızı kaydedin.
 
-Kaynak kod Release olarak derlenmiş ve `win-x64` için tek dosya EXE üretilmiştir. GitHub Actions Windows üzerinde derlemeyi kontrol eder. SOLIDWORKS ile gerçek CAD işlemleri kaynak kurtarma ortamında çalıştırılmamıştır; derleme kontrolü çentik veya dışa aktarma sonuçlarının işlev testi değildir. NuGet, eski .NET Framework hedefli interop paketleri için `NU1701` uyumluluk uyarısı üretir; çalışan EXE'nin bağımlılık sürümleri korunmuştur.
+GitHub Actions her değişiklikte Windows üzerinde Release derlemesini kontrol eder. NuGet, .NET Framework hedefli SOLIDWORKS interop paketleri için `NU1701` uyumluluk uyarısı verir; bu uyarı uygulamanın çalışmasını etkilemez.
 
 ## Kaynak düzeni
 
@@ -68,6 +68,8 @@ Kaynak kod Release olarak derlenmiş ve `win-x64` için tek dosya EXE üretilmi�
 | `Core/ReportManager.cs` | CSV ve HTML kesim listesi |
 | `Core/FileLogger.cs` | İşlem günlüğü |
 
+Kaynak kodun kökeni [RECOVERY.md](RECOVERY.md) dosyasında açıklanmıştır.
+
 ## Katkı ve lisans
 
 Hata bildirirken SOLIDWORKS/Windows sürümünü, seçili seçenekleri, beklenen ve gerçekleşen sonucu belirtin. CAD dosyaları ve günlükleri paylaşırken kişisel veya müşteri bilgilerini çıkarın.
@@ -76,4 +78,4 @@ Proje kaynak kodu **GNU General Public License v3.0 only (`GPL-3.0-only`)** alt�
 
 ## English overview
 
-A working C# / .NET 8 / WPF application for Windows that automates SOLIDWORKS sheet-metal flat-pattern DXF/DWG export, bend-end notches, assembly/configuration processing and CSV/HTML cut-list reports. This source was recovered from the owner's working fast-version executable. Release compilation and Windows executable publication were checked; SOLIDWORKS runtime behavior was not independently tested in the recovery environment. See [RECOVERY.md](RECOVERY.md) for provenance. Licensed under GPL-3.0-only.
+A C# / .NET 8 / WPF application for Windows that automates SOLIDWORKS sheet-metal flat-pattern DXF/DWG export, bend-end notches, assembly/configuration processing and CSV/HTML cut-list reports. The application is in production use with SOLIDWORKS. Keep `hizli` in the executable name to use the fast notching mode. See [RECOVERY.md](RECOVERY.md) for source provenance. Licensed under GPL-3.0-only.

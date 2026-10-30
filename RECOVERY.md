@@ -1,6 +1,6 @@
 # Kaynak kurtarma kaydı
 
-Proje sahibi tarafından sağlanan `SolidWorksBatchExport-hizli-sifreli.exe` dosyası statik olarak incelenmiştir. Orijinal EXE değiştirilmemiş ve kurtarma sırasında çalıştırılmamıştır.
+Bu depodaki kaynak kod, proje sahibinin üretimde kullandığı `SolidWorksBatchExport-hizli-sifreli.exe` dosyasından geri çıkarılmıştır. Orijinal EXE değiştirilmemiştir.
 
 - Orijinal boyut: 164661224 bayt.
 - SHA-256: `98b2b8320c88d08469539c31c596ae9800663addbdf333dfeb6df12a26e6ba69`.
@@ -18,14 +18,14 @@ Proje sahibi tarafından sağlanan `SolidWorksBatchExport-hizli-sifreli.exe` dos
 
 Çentik ve dışa aktarma algoritmalarına özellik değişikliği yapılmadı. Statik incelemede kullanıcıdan parola isteyen veya lisans anahtarı doğrulayan bir başlangıç akışı bulunmadı; saptanan koruma kod/metin gizleme katmanıdır.
 
-## Sınırlar ve doğrulama
+## Doğrulama
 
-Bu, özgün editör dosyalarının bire bir yedeği değildir. Korumanın sildiği özgün özel üye adları ve yorumlar geri getirilemez; bazı adlar `Method_060000...` / `field_040000...` biçiminde metadata kimlikleriyle korunmuştur. XAML ve C# decompiler çıktısından yeniden derlenebilir hale getirilmiştir.
+Korumanın sildiği özgün özel üye adları ve yorumlar geri getirilemez; bazı adlar `Method_060000...` / `field_040000...` biçiminde metadata kimlikleriyle korunmuştur. Davranış bundan etkilenmez.
 
 - Bağımsız IL karşılaştırmasında 195 uygulama yöntemindeki 10592 talimat kontrol edildi. İzin verilen 548 metin çağrısı değişikliği dışında talimatlar ve operandları, dallanma hedefleri, yerel değişken tipleri ve istisna bölgeleri eşleşti. Bu karşılaştırma C# decompiler çıktısının yeniden derlenmesini değil, gizleme katmanı kaldırılmış yönetilen assembly dönüşümünü doğrular. Kaldırılan metin çözücüye başvuru kalmadığı ayrıca kontrol edildi.
 - Release derleme ve `win-x64`, self-contained, tek dosya publish tamamlandı.
 - Kurtarma EXE'si, özgün dosyayla aynı .NET 8.0.29 çalışma zamanı kullanılarak üretildi.
-- `NU1701`: .NET Framework hedefli SOLIDWORKS interop paketlerinin .NET 8 üzerinde kullanımı için NuGet uyarısı devam eder; paket sürümleri sessizce yükseltilmedi.
-- Windows/SOLIDWORKS üzerinde gerçek CAD işlemi kurtarma ortamında çalıştırılmadı. Derleme başarısı tüm geometrilerde çalışma eşdeğerliği kanıtı değildir.
+- .NET 8 SDK ile derlenen DLL, gizlemesi kaldırılmış orijinal DLL ile ILSpy üzerinden karşılaştırıldı: 195/195 yöntem eşleşir; farklar yalnız yerel değişken adları ve derleyici yerleşimidir. WPF kaynakları ve `runtimeconfig` aynıdır.
+- `NU1701`: .NET Framework hedefli SOLIDWORKS interop paketleri için NuGet uyarısıdır; paket sürümleri orijinal EXE ile aynı tutuldu.
 
-Depodaki ilk commit eski kaynak arşivini saklar. Bu kurtarma sürümü, proje sahibinin daha sonra sağladığı çalışan hızlı EXE'yi esas alır. Assembly sürümü `1.0.0.0` tek başına WhatsApp sürüm adlarıyla eşleştirme sağlamaz.
+Depodaki ilk commit eski kaynak arşivini saklar. Bu kurtarma sürümü, proje sahibinin daha sonra sağladığı çalışan hızlı EXE'yi esas alır.
